@@ -2,11 +2,22 @@
 const items = document.getElementById("item");
 // set empty array /  local storage
 let cart = JSON.parse(localStorage.getItem("data")) || [];
+let permdata = JSON.parse(localStorage.getItem("permdata"));
+
+// set online data
+function datas() {
+  if (permdata === null) {
+    localStorage.setItem("permdata", JSON.stringify(itemlist));
+  } else {
+    localStorage.setItem("permdata", JSON.stringify(permdata));
+  }
+}
+datas();
 
 // increase button
 function increase(id) {
   let search = cart.find((e) => e.id === id);
-  let price = itemlist[id - 1].pricetag;
+  let price = permdata[id - 1].pricetag;
   if (search === undefined) {
     cart.push({
       id: id,
@@ -19,14 +30,15 @@ function increase(id) {
     search.sum += price;
   }
   localStorage.setItem("data", JSON.stringify(cart));
-  quantity(id);
-  sum(id);
-  totalquantity();
+  // quantity(id);
+  // sum(id);
+  // totalquantity();
+  generateitem();
 }
 // decrease button
 function decrease(id) {
   let search = cart.find((e) => e.id === id);
-  let price = itemlist[id - 1].pricetag;
+  let price = permdata[id - 1].pricetag;
   if (search === undefined) return;
   if (search.item === 0) {
   } else {
@@ -35,9 +47,10 @@ function decrease(id) {
   }
   cart = cart.filter((e) => e.item !== 0) || [];
   localStorage.setItem("data", JSON.stringify(cart));
-  quantity(id);
-  sum(id);
-  totalquantity();
+  // quantity(id);
+  // sum(id);
+  // totalquantity();
+  generateitem();
 }
 
 // DOM item quantity
@@ -74,16 +87,16 @@ function totalquantity() {
 function generateitem() {
   return (
     totalquantity(),
-    (items.innerHTML = itemlist
+    (items.innerHTML = permdata
       .map((i) => {
-        const { id, name, img, price } = i;
+        const { id, name, img, price, description } = i;
         let search = cart.find((x) => x.id == id) || [];
         return `
-  <div id="id-${id}" title="${name}" class="card" style="width: 18rem" >
-    <img src=${img} class="card-img-top" alt="gold bar picture" />
+  <div id="id-${id}" title="${name}" class="card" style="width: 300px, height:300px" >
+    <img src=${img} class="card-img-top" alt="no picture" />
     <div class="card-body">
       <h5 class="card-title">${name}</h5>
-      <p class="card-text">Malaysia Gold Bar 99.99% casting</p>
+      <p class="card-text">${description}</p>
       <p>Rm  ${price}</p>
       <button onclick="increase(${id})" type="button" class="btn btn-dark">+</button>
       <button id=${

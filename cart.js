@@ -4,11 +4,22 @@ const shoppingcart = document.getElementById("shoppingcart");
 
 // set empty array /  local storage
 let cart = JSON.parse(localStorage.getItem("data")) || [];
+let permdata = JSON.parse(localStorage.getItem("permdata"));
+
+// set online data
+function datas() {
+  if (permdata === null) {
+    localStorage.setItem("permdata", JSON.stringify(itemlist));
+  } else {
+    localStorage.setItem("permdata", JSON.stringify(permdata));
+  }
+}
+datas();
 
 // function increase
 function increase(id) {
   let search = cart.find((e) => e.id === id);
-  let price = itemlist[id - 1].pricetag;
+  let price = permdata[id - 1].pricetag;
   search.item += 1;
   search.sum += price;
   cartlist();
@@ -18,7 +29,7 @@ function increase(id) {
 // function decrease
 function decrease(id) {
   let search = cart.find((e) => e.id === id);
-  let price = itemlist[id - 1].pricetag;
+  let price = permdata[id - 1].pricetag;
   if (search === undefined) return;
   if (search.item === 0) {
   } else {
@@ -96,12 +107,12 @@ function cartlist() {
       cart
         .map((i) => {
           const { id, item, sum } = i;
-          let search = itemlist.find((e) => e.id == id) || [];
+          let search = permdata.find((e) => e.id == id) || [];
           const { name, img, price } = search;
           return `
         <tr id=${id} title=${name} class="cardbox" style="width: 500px" >
           <td>
-            <img src=${img} class="card-img-top" alt="gold bar picture" style="width: 100px"/>
+            <img src=${img} class="card-img-top" alt="no picture" style="width: 100px"/>
             <span> ${name}</span>
           </td>
           <td>
@@ -126,7 +137,7 @@ function cartlist() {
         .join("") +
       `
         <tr>
-          <td colspan="3">Total amount is (Rm)<td>
+          <td colspan="2">Total amount is (Rm)<td>
           <td id="totalsum"> ${totalsum}<td>
         </tr>
         <tr>

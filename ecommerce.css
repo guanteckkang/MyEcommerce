@@ -16,7 +16,7 @@
 #cartamount {
   color: red;
 }
-#emptydiv {
+.emptydiv {
   height: 100px;
 }
 #item {
@@ -41,4 +41,13 @@
 tr,
 td {
   border: 3px solid black;
+  border-collapse: collapse;
+  empty-cells: hide;
+}
+#addform {
+  border: 2px solid black;
+  width: 80%;
+  min-height: 500px;
+  margin: auto;
+  text-align: center;
 }
