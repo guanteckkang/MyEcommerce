@@ -132,7 +132,7 @@ function cartlist() {
         <tr>
         <td colspan="3"></td>
         <td>
-          <a href="ecommerce.html"><button>Go back</button></a>
+          <a href="index.html"><button>Go back</button></a>
           <button onclick="checkout(${totalsum})" >Checkout</button>
           <button onclick="clearcart()">Clearcart</button>
         </td>
@@ -144,7 +144,7 @@ function cartlist() {
       <td><h2>Cart is empty</h2></td>
     </tr>
     <tr>
-      <td><a href="ecommerce.html"><Button id="homebutton">Back to page</Button></a></td>
+      <td><a href="index.html"><Button id="homebutton">Back to page</Button></a></td>
     </tr>
     `;
     shoppingcart.style.display = "none";
