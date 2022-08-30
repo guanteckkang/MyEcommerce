@@ -4,7 +4,7 @@ let permdata = JSON.parse(localStorage.getItem("permdata"));
 
 // set online data
 function datas() {
-  if (permdata === null) {
+  if (permdata.length == 0) {
     localStorage.setItem("permdata", JSON.stringify(itemlist));
   } else {
     localStorage.setItem("permdata", JSON.stringify(permdata));

@@ -50,4 +50,16 @@ td {
   min-height: 500px;
   margin: auto;
   text-align: center;
+  padding: 10px;
+}
+#removeitem {
+  border: 2px solid black;
+  width: 70%;
+  min-height: 500px;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+}
+#emptylist {
+  text-align: center;
 }
